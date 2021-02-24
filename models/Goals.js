@@ -20,6 +20,11 @@ const GoalsSchema = new mongoose.Schema({
     dueAt:{
         type: Date,
         required: [false, 'Enter the targetted date for the savings']
+    },
+    user_id:{
+        type: String,
+        required: [true, 'please enter the user ID for the transaction'],
+        trim: true,
     }
 })
 

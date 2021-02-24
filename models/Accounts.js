@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 
-const AccountsScheme = new mongoose.Schema({
+const AccountsScheme = new mongoose.Schema({ 
     AccountName: {
         type: String,
         required: [true, 'please select a name to give the account'],
@@ -18,6 +18,11 @@ const AccountsScheme = new mongoose.Schema({
         type: String,
         required: [true, 'enter the opening balance for the account'],
         trim: true
+    },
+    user_id:{
+        type: String,
+        required: [true, 'please enter the user ID for the transaction'],
+        trim: true,
     }
 })
 

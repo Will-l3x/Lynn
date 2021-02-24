@@ -33,6 +33,11 @@ const TransactionSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now 
+    },
+    user_id:{
+        type: String,
+        required: [true, 'please enter the user ID for the transaction'],
+        trim: true,
     }
 });
 

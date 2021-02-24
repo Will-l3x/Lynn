@@ -5,13 +5,21 @@ const Transaction = require('../models/Transactions')
 
 exports.getTransactions = async (req, res, next)=>{ 
     try{
-        const transactions = await Transaction.find();
-
-        return res.status(200).json({ 
-            success: true,
-            count: transactions.length,
-            data: transactions
-        })
+        const user_id = req.params.id
+        Transaction.find({user_id: user_id}, (err, transactions)=>{
+            if (!transactions){
+                return res.status(500).json({
+                    success: false,
+                    error: 'no transactions recorded yet'
+                }) 
+            }else{
+                return res.status(200).json({ 
+                    success: true,
+                    count: transactions.length,
+                    data: transactions
+                })
+            }
+        });  
     }catch (err){
         return res.status(500).json({
             success: false,
@@ -25,11 +33,11 @@ exports.getTransactions = async (req, res, next)=>{
 
 exports.addTransaction = async(req, res, next)=>{
     try{
-        const { createdAt, PaymentMethod,Reccuring,Category,Vendor,amount,Account } = req.body;
+        const { createdAt, PaymentMethod,Reccuring,Category,Vendor,amount,Account, user_id } = req.body;
 
         const transaction = await Transaction.create(req.body);
 
-             return res.status(201).json({
+             return res.status(201).json({ 
                 success: true,
                 data: transaction
             })

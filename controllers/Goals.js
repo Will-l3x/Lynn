@@ -2,13 +2,23 @@ const Goals = require('../models/Goals')
 //get all the goals for the user
 exports.getGoals = async (req, res, next)=>{
    try{
-        const goals = await Goals.find();
+        const user_id = req.params.id
+        Goals.find({user_id: user_id}, (err, goal)=>{
+            if (!goal){
+                return res.status(404).json({
+                    success: false,
+                    error: 'user id not found in database'
+                })
+            }else {
+                return res.status(200).json({
+                    success: true,
+                    count: goal.length,
+                    data: goal,
+                }) 
+            }
+        });
         
-        return res.status(200).json({
-            success: true,
-            count: goals.length,
-            data: goals,
-        })
+       
    }catch(err){
         return res.status(500)({
             success: false,
@@ -20,7 +30,7 @@ exports.getGoals = async (req, res, next)=>{
 //get all the goals for the user
 exports.AddGoal = async (req, res, next)=>{
     try{
-        const { GoalName, Amount, createdAt,  dueAt} = req.body;
+        const { GoalName, Amount, createdAt,  dueAt, user_id} = req.body;
 
         const goals = await Goals.create(req.body);
 

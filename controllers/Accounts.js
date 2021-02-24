@@ -2,7 +2,7 @@ const Accounts = require('../models/Accounts')
 
 exports.addAccount = async (req, res, next)=>{
     try{
-        const { AccountName, Currency,OpeningBalance} = req.body;
+        const { AccountName, Currency,OpeningBalance, user_id} = req.body;
 
         const accounts = await Accounts.create(req.body);
 
@@ -51,24 +51,35 @@ exports.checkAccount = async (req, res, next)=>{
 
 exports.getAccounts = async (req, res, next)=>{
     try{
-        const accounts = await Accounts.find();
+        const user_id = req.params.id
+        Accounts.find({user_id: user_id }, (err, account)=>{
+            if (!account){
+                return res.status(404).json({
+                    success: false,
+                    error: 'user id not found in database'
+                })
+            }else {
+                return res.status(200).json({ 
+                    success: true,
+                    count: account.length,
+                    data: account
+                })
+            }
+        });
 
-        return res.status(200).json({ 
-            success: true,
-            count: accounts.length,
-            data: accounts
-        })
+        
     }catch (err){
         return res.status(500).json({
             success: false,
-            error: 'server error'
-        }) 
+            error: 'server error contact admin'
+        })
+        
     }
 }
 
 exports.updateAccount = async (req, res, next)=>{
     try {
-        const { AccountName, Currency,OpeningBalance} = req.body;
+        const { AccountName, Currency,OpeningBalance, user_id} = req.body;
 
         const accounts = await Accounts.findById(req.params.id);
 
