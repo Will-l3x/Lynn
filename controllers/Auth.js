@@ -23,11 +23,29 @@ exports.logIn =  (req, res, next)=>{
              message: 'User email not found!'
              });
          } else {
-            let bool = bcrypt.compare(password, user[0].password)
+          bcrypt.compare(password, user[0].password).then((result)=>{
+            if(result){
+              console.log("authentication successful")
+              return res.status(201).json({
+                success: true,
+                message: 'Log in successful',
+                data: user,
+              })
+            } else {
+              console.log("authentication failed. Password doesn't match")
+              res.status(400).json({
+                message: 'Password is incorrect!',
+                success: false,
+            })
+            }
+          })
+          .catch((err)=>console.error(err))
+          
+            /*let bool = bcrypt.compare(password, user[0].password)
             .then(function(){
                 console.log(user[0].password);
                 console.log(bool) 
-                if (bool == false){
+                if (bool === true){
                      res.status(400).json({
                         message: 'Password is incorrect!',
                         success: false,
@@ -37,11 +55,11 @@ exports.logIn =  (req, res, next)=>{
                   
                     return res.status(201).json({
                         success: true,
-                        message: 'log in successful',
+                        message: 'Log in successful',
                         data: user,
                     })
                 }
-            })
+            })*/
          }
         })  
         
