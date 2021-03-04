@@ -30,7 +30,7 @@ exports.getGoals = async (req, res, next)=>{
 //get all the goals for the user
 exports.AddGoal = async (req, res, next)=>{
     try{
-        const { GoalName, Amount, createdAt,  dueAt, user_id} = req.body;
+        const { GoalName, Amount,addedAmount,type, createdAt,  dueAt, user_id} = req.body;
 
         const goals = await Goals.create(req.body);
 
@@ -70,32 +70,6 @@ exports.checkGoal = async (req, res, next)=>{
             success: true,
             data: goals
         })
-    }catch (err){
-        return res.status(500).json({
-            success: false,
-            error: 'Server Error'
-        })
-    }
-}
-
-exports.updateGoal = async (req, res, next)=>{
-    try {
-        const { GoalName, Amount, createdAt,  dueAt, user_id} = req.body;
-
-        const goals = await Goals.findById(req.params.id);
-
-        if (!goals){
-            return res.status(404).json({
-                success: false,
-                error: 'No goal Found'
-            })
-        }
-
-        await accounts.updateOne(req.body);
-        return res.status(200).json({
-            success: true,
-            data: accounts
-        });
     }catch (err){
         return res.status(500).json({
             success: false,
