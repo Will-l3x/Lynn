@@ -78,6 +78,32 @@ exports.checkGoal = async (req, res, next)=>{
     }
 }
 
+exports.updateGoal = async (req, res, next)=>{
+    try {
+        const { GoalName, Amount, createdAt,  dueAt, user_id} = req.body;
+
+        const goals = await Goals.findById(req.params.id);
+
+        if (!goals){
+            return res.status(404).json({
+                success: false,
+                error: 'No goal Found'
+            })
+        }
+
+        await accounts.updateOne(req.body);
+        return res.status(200).json({
+            success: true,
+            data: accounts
+        });
+    }catch (err){
+        return res.status(500).json({
+            success: false,
+            error: 'Server Error'
+        })
+    }
+}
+
 //get all the goals for the user
 exports.deleteGoal = async (req, res, next)=>{ 
     try {

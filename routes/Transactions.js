@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {getTransactions, addTransaction, deleteTransaction} = require('../controllers/transaction');
-const {getGoals, AddGoal, checkGoal, deleteGoal } = require('../controllers/Goals');
+const {getGoals, AddGoal, checkGoal, deleteGoal, updateGoal } = require('../controllers/Goals');
 const {addAccount, checkAccount, updateAccount, deleteAccount, getAccounts} = require('../controllers/Accounts');
 const {logIn, Register, Changepswd, getUsers} = require('../controllers/Auth')
 const { forwardAuthenticated } = require('../config/auth');
@@ -25,6 +25,7 @@ router.post('/goals', AddGoal);
 router.get('/goals/:id', getGoals);
 router.get('goal/:id', checkGoal);
 router.delete('goals/:id', deleteGoal);
+router.post('/updategoal/:id',updateGoal);
  
 ///////////////////////////authentification routes//////////////
 router.post('/login', forwardAuthenticated, logIn);
