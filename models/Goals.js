@@ -13,6 +13,15 @@ const GoalsSchema = new mongoose.Schema({
         type: Number,
         required: [true, 'enter the amount which you wish to reach']
     },
+    addedAmount: {
+         type: Number,
+       default: 0
+    },
+    type: {
+         type: String,
+        trim: true,
+        required: [true, 'Type of goal'],
+    },
     createdAt: {
         type: Date,
         default: Date.now

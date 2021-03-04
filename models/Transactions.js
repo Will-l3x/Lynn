@@ -30,6 +30,10 @@ const TransactionSchema = new mongoose.Schema({
         required: [true, 'enter payment method'],
         trim: true
     },
+    type:{
+        type: String,
+        trim: true
+    },
     createdAt: {
         type: Date,
         default: Date.now 

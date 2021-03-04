@@ -1,4 +1,3 @@
-
 const Auth = require('../models/Auth')
 const bcrypt = require('bcrypt');
 const passport = require('passport');
