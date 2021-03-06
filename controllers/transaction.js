@@ -33,6 +33,8 @@ exports.getTransactions = async (req, res, next)=>{
 
 exports.addTransaction = async(req, res, next)=>{
     try{
+
+        
         const { createdAt, PaymentMethod,Reccuring,Category,Vendor,amount,Account,type, user_id } = req.body;
 
         const transaction = await Transaction.create(req.body);
