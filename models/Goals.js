@@ -34,7 +34,12 @@ const GoalsSchema = new mongoose.Schema({
         type: String,
         required: [true, 'please enter the user ID for the transaction'],
         trim: true,
+    },
+    status:{
+        type: Boolean,
+        required: [true, 'please verify if the goal has been reached or not']
     }
+
 })
 
 module.exports = mongoose.model('Goals', GoalsSchema)

@@ -30,7 +30,7 @@ exports.getGoals = async (req, res, next)=>{
 //get all the goals for the user
 exports.AddGoal = async (req, res, next)=>{
     try{
-        const { GoalName, Amount,addedAmount,type, createdAt,  dueAt, user_id} = req.body;
+        const { GoalName, Amount,addedAmount,type, createdAt,  dueAt, user_id, status} = req.body;
 
         const goals = await Goals.create(req.body);
 
@@ -80,7 +80,7 @@ exports.checkGoal = async (req, res, next)=>{
 
 exports.updateGoal = async (req, res, next)=>{
     try {
-        const { GoalName, Amount,addedAmount,type, createdAt,  dueAt, user_id} = req.body;
+        const { GoalName, Amount,addedAmount,type, createdAt,  dueAt, user_id, status} = req.body;
 
         const goals = await Goals.findById(req.params.id);
 
@@ -103,6 +103,7 @@ exports.updateGoal = async (req, res, next)=>{
         })
     }
 }
+
 
 //get all the goals for the user
 exports.deleteGoal = async (req, res, next)=>{ 
