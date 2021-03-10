@@ -39,26 +39,6 @@ exports.logIn =  (req, res, next)=>{
             }
           })
           .catch((err)=>console.error(err))
-          
-            /*let bool = bcrypt.compare(password, user[0].password)
-            .then(function(){
-                console.log(user[0].password);
-                console.log(bool) 
-                if (bool === true){
-                     res.status(400).json({
-                        message: 'Password is incorrect!',
-                        success: false,
-                    })
-    
-                }else{
-                  
-                    return res.status(201).json({
-                        success: true,
-                        message: 'Log in successful',
-                        data: user,
-                    })
-                }
-            })*/
          }
         })  
         
@@ -157,7 +137,77 @@ exports.Register = async (req, res, next)=>{
 }
 
 exports.Changepswd = async (req, res, next)=>{
-    res.send('Change Password');
+    try{
+      const { Email} = req.body;
+      var nodemailer = require('nodemailer');
+      var generator = require('generate-password');
+
+      var password = generator.generate({
+        length: 7,
+        numbers: true
+      })
+
+      Auth.findOne({ Email: Email }, (err, user) => {
+        if(!user){
+          return res.status(404).json({ 
+            success: false, 
+            message: 'User email not found!'
+            });
+
+
+        }else{
+          bcrypt.genSalt(10, (err, salt) => {
+            bcrypt.hash(password, salt, (err, hash) => {
+              if (err) throw err;
+              password = hash;
+              
+              Auth.updateOne(password)
+                  return res.status(201).json({
+                      success: true,
+                      message: "New Password sent",
+                      
+                  })
+                
+               
+            });
+          });
+           
+        }
+      })
+
+      var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'dimeapp12@gmail.com',
+          pass: 'Dime!@#$'
+        }
+      })
+
+      var mailOptions = {
+        from: 'dimeapp12@gmail.com',
+        to: Email,
+        subject: 'password recovery text',
+        text: password
+      };
+      transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+          console.log(error);
+          return res.status(500).json({
+            success: false,
+            error: 'email failed to send'
+        }) 
+        } else {
+          console.log('Email sent: ' + info.response);
+          return res.status(200).json({ 
+            success: true,
+            message: "email sent: " + info.response
+        })
+        }
+      });
+    
+    }catch(err){
+
+    }
 }
 
 exports.getUsers = async (req, res, next)=>{
