@@ -30,7 +30,7 @@ router.post('/updategoal/:id',updateGoal);
 ///////////////////////////authentification routes//////////////
 router.post('/login', forwardAuthenticated, logIn);
 router.post('/register', Register);
-router.post('/changepswd/:id', Changepswd);
+//router.post('/changepswd/:id', Changepswd);
 router.get('/users', getUsers);
 
 
