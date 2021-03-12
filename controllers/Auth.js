@@ -137,63 +137,7 @@ exports.Register = async (req, res, next)=>{
     }
 }
 exports.Changepswd = async(req, res, next )=>{
-  const { Email, password, password2,  FirstName, LastName, PhoneNumber} = req.body;
-
-  const user = Auth.findById(req.params.id);
-  const newUser = new Auth({
-                  
-    Email,
-    password,
-    FirstName,
-    LastName
-  });
-
-  bcrypt.genSalt(10, (err, salt) => {
-    bcrypt.hash(newUser.password, salt, (err, hash) => {
-      if (err) throw err;
-      newUser.password = hash;
-      newUser
-        .save()
-        .then(user => {
-          return res.status(201).json({
-              success: true,
-              message: "Account Created Successfully You can login",
-              
-          })
-        })
-        .catch(err => console.log(err));
-    });
-  });
-    if(!user){
-      return res.status(404).json({
-        success: false,
-        message: "user not found in the system"
-      })
-    }
-    const newUser = Auth({
-                  
-      Email,
-      password,
-      FirstName,
-      LastName
-    });
-
-    bcrypt.genSalt(10, (err, salt) => {
-      bcrypt.hash(newUser.password, salt, (err, hash) => {
-        if (err) throw err;
-        newUser.password = hash;
-        newUser
-          .updateOne()
-          .then(user => {
-            return res.status(201).json({
-                success: true,
-                message: "Account Created Successfully You can login",
-                
-            })
-          })
-          .catch(err => console.log(err));
-      });
-    });
+  
     
        
   }
