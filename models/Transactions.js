@@ -22,12 +22,12 @@ const TransactionSchema = new mongoose.Schema({
     },
     Reccuring: {
         type: String,
-        required: [true, 'enter frequency of expense'],
+        required: [false, 'enter frequency of expense'],
         trim: true,
     },
     PaymentMethod:{
         type: String,
-        required: [true, 'enter payment method'],
+        required: [false, 'enter payment method'],
         trim: true
     },
     type:{
