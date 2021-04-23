@@ -37,7 +37,7 @@ const GoalsSchema = new mongoose.Schema({
     },
     status:{
         type: Boolean,
-        required: [true, 'please verify if the goal has been reached or not']
+        required: [false, 'please verify if the goal has been reached or not']
     }
 
 })
