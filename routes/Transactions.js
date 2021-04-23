@@ -10,7 +10,7 @@ const { forwardAuthenticated } = require('../config/auth');
 ////////////////////accounts routes/////////////////
 router.post('/accounts', addAccount);
 router.get('/account/:id', checkAccount);
-router.post('/upadateaccount/:id', updateAccount);
+router.post('/updateaccount/:id', updateAccount);
 router.delete('/accounts/:id', deleteAccount);
 router.get('/accounts/:id', getAccounts); 
 
