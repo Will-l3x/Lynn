@@ -7,7 +7,7 @@ exports.getGoals = async (req, res, next)=>{
             if (!goal){
                 return res.status(404).json({
                     success: false,
-                    error: 'user id not found in database'
+                    error: 'user id not found in System'
                 })
             }else {
                 return res.status(200).json({
