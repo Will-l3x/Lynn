@@ -44,7 +44,7 @@ exports.checkAccount = async (req, res, next)=>{
     }catch (err){
         return res.status(500).json({
             success: false,
-            error: 'Server Error'
+            error: 'Server Error '
         })
     }
 }
