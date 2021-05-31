@@ -34,7 +34,7 @@ exports.checkAccount = async (req, res, next)=>{
         if(!accounts){
             return res.status(404).json({
                 success: false,
-                error: "Account Not Found"
+                error: "Account is Not Found"
             })
         }
         return res.status(200).json({
