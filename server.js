@@ -5,6 +5,7 @@ const morgan = require( 'morgan');
 const passport = require('passport');
 const connectDB = require('./config/db');
 var cors = require('cors');
+var helmet = require('helmet')
 
 
 dotenv.config({path: './config/config.env'});
@@ -22,6 +23,7 @@ require('./config/passport')(passport);
 // Passport middleware
 app.use(passport.initialize());
 app.use(cors());
+app.use(helmet());
 app.use(passport.session());
 app.use(express.json());
 
@@ -29,10 +31,10 @@ app.use('/api', transactions);
 app.use('/api',goals);
 
 
-const PORT = process.env.PORT ;
 
-app.listen(PORT, ()=>{
-    console.log(`Server Running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold)
+
+app.listen(process.env.PORT || 3000, ()=>{
+    console.log(`Server Running in ${process.env.NODE_ENV} mode on port ${process.env.PORT}`.yellow.bold)
 })
 //app.listen(PORT, console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold));
 

@@ -10,7 +10,7 @@
   "author": "Wilvanos Zhira",
   "license": "MIT",
   "dependencies": {
-    "bcrypt": "^5.0.0",
+    "bcrypt": "^5.0.1",
     "colors": "^1.4.0",
     "connect-flash": "^0.1.1",
     "cors": "^2.8.5",
@@ -18,6 +18,7 @@
     "ejs": "^3.1.5",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
+    "helmet": "^4.6.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.10",
     "morgan": "^1.10.0",
