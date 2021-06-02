@@ -32,7 +32,7 @@ app.use('/api',goals);
 const PORT = process.env.PORT ;
 
 app.listen(PORT, ()=>{
-    console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold)
+    console.log(`Server Running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold)
 })
 //app.listen(PORT, console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold));
 
